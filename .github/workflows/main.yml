@@ -44,11 +44,11 @@ jobs:
         with:
           type: 'zip'
           path: 'dist/Botox.app'
-          filename: 'Botox_Intel_"$RELEASE_VERSION".zip'
+          filename: "Botox_Intel_${{ env.RELEASE_VERSION }}.zip"
           exclusions: '*.git* '
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
-            'Botox_Intel_"$RELEASE_VERSION".zip'
+            "Botox_Intel_${{ env.RELEASE_VERSION }}.zip"
