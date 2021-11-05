@@ -2,7 +2,7 @@ import pyautogui
 import logging
 
 logger = logging.getLogger('pyautogui')
-logger.handlers = None
+logger.setLevel(logging.DEBUG)
 
 from crypto import Crypto
 

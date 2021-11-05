@@ -154,7 +154,7 @@ class AwesomeStatusBarApp(rumps.App):
         self.stop_listener()
         self.cleanup()
 
-        logger.debug("Cleanup complete")
+        logger.debug("Cleanup complete - Exiting")
         rumps.quit_application()
 
 

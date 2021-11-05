@@ -2,14 +2,20 @@ from setuptools import setup
 import py2app.recipes
 
 APP = ['src/botox.py']
+APPNAME = 'Botox'
+VERSION = "1.0.0"
 DATA_FILES = []
 OPTIONS = {
     'argv_emulation': True,
     'iconfile': 'resources/icon.icns',
-    'plist': {
-        'CFBundleShortVersionString': '0.2.0',
-        'LSUIElement': True,
-    },
+    'plist':{
+            'LSUIElement': True,
+            'CFBundleIconFile':'resources/icon.icns',
+            'CFBundleIdentifier':'com.Rainelz.Botox',
+            'CFBundleGetInfoString': APPNAME,
+            'CFBundleVersion' : VERSION,
+            'CFBundleShortVersionString' : VERSION
+            },
     'packages': ['rumps', 'PySimpleGUI', 'cryptography', 'cffi'],
 }
 
@@ -23,7 +29,7 @@ py2app.recipes.PREScripts = Script_recipe()
 
 setup(
     app=APP,
-    name='Botox',
+    name=APPNAME,
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     setup_requires=['py2app'], install_requires=['rumps']

@@ -23,9 +23,10 @@ class Listener(Thread):
     def run(self):
         self.control_pipe = open_pipe(self.control_pipe_path, OpenMode.READ, blocking=True)
         self.command_pipe = open_pipe(self.command_pipe_path, OpenMode.READ)
+        logger.debug(f"opened control on {self.control_pipe} and command on {self.command_pipe}")
         stopped = False
         while True and not stopped:
-            ready_read, _, _ = select.select([self.command_pipe, self.control_pipe], [], [])
+            ready_read, _, exceptions = select.select([self.command_pipe, self.control_pipe], [], [self.command_pipe, self.control_pipe])
             for fd in ready_read:
 
                 cmd_byte = os.read(fd, 1)
@@ -51,8 +52,10 @@ class Listener(Thread):
                     self.clean()
                     stopped = True
                     break
+            for fd in exceptions:
+                logger.debug(f"detected exceptional condition on {fd}")
 
     def clean(self):
         os.close(self.control_pipe)
         os.close(self.command_pipe)
-        logger.debug("Cleaned")
+        logger.debug("Cleaned pipes")
