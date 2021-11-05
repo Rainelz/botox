@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+rumps = "*"
+pyautogui = "*"
+pysimplegui = "*"
+cryptography = "*"
+
+[dev-packages]
+py2app = "*"
+
+[requires]
+python_version = "3.9"
