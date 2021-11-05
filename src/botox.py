@@ -5,7 +5,7 @@ import os
 
 from gui import CredentialsGUI, PasswordGUI
 from crypto import Crypto
-from executor import Executor
+from executor import Executor, check_permissions
 from listener import Listener
 import logging
 import sys
@@ -79,13 +79,14 @@ class AwesomeStatusBarApp(rumps.App):
         gui = CredentialsGUI(dataQ)
         gui.start()
         gui.join()
+
         data = dataQ.get(block=False)
         if data:
             data, key = self.crypto.encrypt(data)
             self._store_data(data)
-
-        print(key)
-        self.key = key
+            self.key = key
+            return True
+        return False
 
     def set_key(self):
         logger.debug("BOTOX - Set Key")
@@ -103,15 +104,19 @@ class AwesomeStatusBarApp(rumps.App):
 
     def start(self, sender):
         logger.debug("BOTOX - Start")
+        if not check_permissions():
+            rumps.notification('WARNING', 'Please give Botox permissions from settings', '')
 
         if not self.data_file.exists():
-            self.set_credentials(None)
+            if not self.set_credentials(None):
+                logger.debug("Dismissed Credentials insert")
+                return
         elif not self.key:
             if not self.set_key():
-                logger.debug(("Dismissed Password insert"))
-                pass
+                logger.debug("Dismissed Password insert")
+                return
 
-        executor = Executor(self.key)
+        executor = Executor(self.data_file, self.key)
         self.listener = Listener(CONTROL_PIPE_PATH, COMMAND_PIPE_PATH, executor)
         self.listener.start()
         self.listening = True
@@ -163,8 +168,6 @@ def main(args):
         slave(args.cmd)
     else:
         AwesomeStatusBarApp().run()
-
-        # STEP 1 - create the window, read the window, close the window.
 
 
 if __name__ == "__main__":

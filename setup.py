@@ -10,7 +10,6 @@ OPTIONS = {
     'iconfile': 'resources/icon.icns',
     'plist':{
             'LSUIElement': True,
-            'CFBundleIconFile':'resources/icon.icns',
             'CFBundleIdentifier':'com.Rainelz.Botox',
             'CFBundleGetInfoString': APPNAME,
             'CFBundleVersion' : VERSION,

@@ -25,6 +25,8 @@ class CredentialsGUI(Process):
         window.close()
         if event == 'Submit':
             self.dataQ.put(values)
+        else:
+            self.dataQ.put(None)
 
 
 class PasswordGUI(Process):
@@ -46,3 +48,5 @@ class PasswordGUI(Process):
         if event == 'Submit':
             key = preprocess_key(values['password'])
             self.dataQ.put(key)
+        else:
+            self.dataQ.put(None)
