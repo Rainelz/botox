@@ -19,9 +19,8 @@ Automates username and password typing by typing:
    `Preferences->Keyboard->Customise Control Strip `-> Drag quick actions to your touchbar
 4. Left click on 💉 in your status bar and click `Start`
 5. You will be prompted for `username` and `password`
-6. Open quick actions from touchbar and select `P`
-7. Enable Botox to use your keyboard from `Preferences->Privacy->Accessibility->Botox`
-8. You are set up
+6. Enable Botox to use your keyboard from `Preferences->Privacy->Accessibility->Botox`
+7. You are set up
 
 ## Info
 
