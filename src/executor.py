@@ -1,8 +1,7 @@
-import pyautogui
 import logging
-
-logger = logging.getLogger('pyautogui')
-logger.setLevel(logging.DEBUG)
+from pynput.keyboard import Controller, Key
+logger = logging.getLogger('pynput')
+logger.handlers = None
 
 from crypto import Crypto
 
@@ -15,14 +14,15 @@ class Executor:
         self.crypto = Crypto()
         with open('resources/.botox', 'rb') as f:
             self.data = f.read()
+        self.keyboard = Controller()
 
     def set_user_pass(self):
         logger.debug("Executing commands user")
-        pyautogui.write(self.crypto.decrypt(self.data, self.key)['username'])
-        pyautogui.press('tab')
+        self.keyboard.type(self.crypto.decrypt(self.data, self.key)['username'])
+        self.keyboard.tap(Key.tab)
         self.set_pass()
 
     def set_pass(self):
         logger.debug("Executing commands password ")
-        pyautogui.write(self.crypto.decrypt(self.data, self.key)['password'])
-        pyautogui.press('enter')
+        self.keyboard.type(self.crypto.decrypt(self.data, self.key)['password'])
+        self.keyboard.tap(Key.enter)

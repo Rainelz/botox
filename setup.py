@@ -16,7 +16,7 @@ OPTIONS = {
             'CFBundleVersion' : VERSION,
             'CFBundleShortVersionString' : VERSION
             },
-    'packages': ['rumps', 'PySimpleGUI', 'cryptography', 'cffi'],
+    'packages': ['rumps', 'PySimpleGUI', 'pynput', 'cryptography', 'cffi'],
 }
 
 

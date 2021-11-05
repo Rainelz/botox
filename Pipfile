@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 rumps = "*"
-pyautogui = "*"
 pysimplegui = "*"
 cryptography = "*"
+pynput = "*"
 
 [dev-packages]
 py2app = "*"
