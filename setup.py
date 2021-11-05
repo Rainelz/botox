@@ -3,7 +3,7 @@ import py2app.recipes
 
 APP = ['src/botox.py']
 APPNAME = 'Botox'
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 DATA_FILES = []
 OPTIONS = {
     'argv_emulation': True,
